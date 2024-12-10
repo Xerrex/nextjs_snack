@@ -1,13 +1,8 @@
 import { sql } from '@vercel/postgres';
-import {
-  CustomerField,
-  CustomersTableType,
-  InvoiceForm,
-  InvoicesTable,
-  LatestInvoiceRaw,
-  Revenue,
-} from './definitions';
+import { CustomerField, CustomersTableType, InvoiceForm,
+  InvoicesTable, LatestInvoiceRaw, Revenue,} from './definitions';
 import { formatCurrency } from './utils';
+
 
 export async function fetchRevenue() {
   try {
@@ -38,8 +33,7 @@ export async function fetchLatestInvoices() {
       LIMIT 5`;
 
     const latestInvoices = data.rows.map((invoice) => ({
-      ...invoice,
-      amount: formatCurrency(invoice.amount),
+      ...invoice, amount: formatCurrency(invoice.amount),
     }));
     return latestInvoices;
   } catch (error) {
