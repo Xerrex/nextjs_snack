@@ -170,6 +170,7 @@ export async function fetchCustomers() {
     return customers;
   } catch (err) {
     console.error('Database Error:', err);
+    console.log('Database Error:', err); // TODO: remove
     throw new Error('Failed to fetch all customers.');
   }
 }
