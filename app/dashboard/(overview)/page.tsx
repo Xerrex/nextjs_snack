@@ -6,6 +6,12 @@ import { RevenueChartSkeleton, LatestInvoicesSkeleton, CardsSkeleton } from '@/a
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { lusitana } from '@/app/ui/fonts';
 
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: 'Home',
+};
+
 
 export default async function Page() {
 
