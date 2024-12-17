@@ -1,25 +1,20 @@
 import { sql } from '@vercel/postgres';
-import {
-  CustomerField,
-  CustomersTableType,
-  InvoiceForm,
-  InvoicesTable,
-  LatestInvoiceRaw,
-  Revenue,
-} from './definitions';
+import { CustomerField, CustomersTableType, InvoiceForm,
+  InvoicesTable, LatestInvoiceRaw, Revenue,} from './definitions';
 import { formatCurrency } from './utils';
+
 
 export async function fetchRevenue() {
   try {
     // Artificially delay a response for demo purposes.
     // Don't do this in production :)
 
-    // console.log('Fetching revenue data...');
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    console.log('Fetching revenue data...');
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
 
-    // console.log('Data fetch completed after 3 seconds.');
+    console.log('Data fetch completed after 3 seconds.');
 
     return data.rows;
   } catch (error) {
@@ -38,8 +33,7 @@ export async function fetchLatestInvoices() {
       LIMIT 5`;
 
     const latestInvoices = data.rows.map((invoice) => ({
-      ...invoice,
-      amount: formatCurrency(invoice.amount),
+      ...invoice, amount: formatCurrency(invoice.amount),
     }));
     return latestInvoices;
   } catch (error) {
@@ -84,10 +78,7 @@ export async function fetchCardData() {
 }
 
 const ITEMS_PER_PAGE = 6;
-export async function fetchFilteredInvoices(
-  query: string,
-  currentPage: number,
-) {
+export async function fetchFilteredInvoices(query: string, currentPage: number,) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
@@ -179,6 +170,7 @@ export async function fetchCustomers() {
     return customers;
   } catch (err) {
     console.error('Database Error:', err);
+    console.log('Database Error:', err); // TODO: remove
     throw new Error('Failed to fetch all customers.');
   }
 }
